@@ -12,7 +12,8 @@
       "type-check": "tsc --noEmit",
       "format": "prettier --write .",
       "cspell": "cspell \"**/*.{ts,js,json,md}\"",
-      "unlink:g": "powershell -ExecutionPolicy ByPass -File scripts/unlink.ps1"
+      "unlink:g": "powershell -ExecutionPolicy ByPass -File scripts/unlink.ps1",
+      "update-versions": "node scripts/update-versions.mjs"
    },
    "files": [
       "dist",

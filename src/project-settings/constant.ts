@@ -12,9 +12,9 @@ export const WEB_CODE_FORMAT: RequireDependencies = {
       //eslint
       eslint: '^9.33.0',
       'eslint-config-prettier': '^10.1.8',
-      'eslint-plugin-prettier': '^5.5.4',
-      '@typescript-eslint/eslint-plugin': '^8.40.0',
-      '@typescript-eslint/parser': '^8.40.0',
+      'eslint-plugin-prettier': '^5.5.5',
+      '@typescript-eslint/eslint-plugin': '^8.53.0',
+      '@typescript-eslint/parser': '^8.53.0',
 
       //prettier
       prettier: '^3.6.2',
@@ -24,17 +24,17 @@ export const WEB_CODE_FORMAT: RequireDependencies = {
 export const WEB_TAILWINDCSS: RequireDependencies = {
    dependencies: {
       tailwindcss: '^4.1.17',
-      '@tailwindcss/vite': '^4.1.17',
+      '@tailwindcss/vite': '^4.1.18',
    },
 };
 export const WEB_DEVTOOLS_DEV_DEPENDENCY: Record<string, string> = {
-   'vite-plugin-vue-devtools': '^7.7.7',
+   'vite-plugin-vue-devtools': '^8.0.5',
 };
 
 //web Router
 export const WEB_ROUTER: RequireDependencies = {
    dependencies: {
-      'vue-router': '^4.5.1',
+      'vue-router': '^4.6.4',
       nprogress: '^0.2.0',
    },
 };
