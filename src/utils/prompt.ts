@@ -3,6 +3,7 @@ import chalk from 'chalk';
 import cliProgress from 'cli-progress';
 import { PackageManager } from '../types';
 import { customMultiselect } from './customMultiselect';
+import { customSelect } from './customSelect';
 
 export function showIntro(message: string): void {
    intro(chalk.bgBlue(chalk.white(' CLI Scaffolding Tool ')));
@@ -44,18 +45,12 @@ export async function promptTemplate(templates: Record<string, any>): Promise<st
       label: template.name,
    }));
 
-   const template = await select({
+   const template = await customSelect({
       message: '选择项目模板:',
       options: templateOptions,
    });
 
-   // 检查用户是否取消了操作
-   if (isCancel(template)) {
-      showError('操作已取消');
-      process.exit(0);
-   }
-
-   return template as string;
+   return template;
 }
 
 export async function promptOverwrite(targetDir: string): Promise<boolean> {
@@ -94,7 +89,7 @@ export async function promptInitGit(): Promise<boolean> {
    return initGit as boolean;
 }
 export async function promptPackageManager(): Promise<PackageManager> {
-   const packageManager = await select({
+   const packageManager = await customSelect<PackageManager>({
       message: '选择包管理器:',
       options: [
          { value: 'pnpm', label: 'pnpm' },
@@ -103,13 +98,7 @@ export async function promptPackageManager(): Promise<PackageManager> {
       ],
    });
 
-   // 检查用户是否取消了操作
-   if (isCancel(packageManager)) {
-      showError('操作已取消');
-      process.exit(0);
-   }
-
-   return packageManager as PackageManager;
+   return packageManager;
 }
 
 export async function promptInstallDeps(): Promise<boolean> {

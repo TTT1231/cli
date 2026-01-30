@@ -71,12 +71,22 @@ class CustomMultiselectPrompt extends Prompt {
          .map((option, index) => {
             const isSelected = this.selectedValues.has(option.value);
             const isCurrent = index === this.cursor;
+            const isLast = index === this.options.length - 1;
 
-            // 箭头指示器
-            const arrow = isCurrent ? chalk.cyan('❯ ') : '  ';
+            // 选择状态指示器 - 统一使用 ○/◉，保持宽度一致
+            // 选中的用实心圆 ◉，未选用的用空心圆 ○
+            const checkbox = isSelected ? chalk.green('◉') : chalk.gray('○');
 
-            // 选择状态指示器
-            const checkbox = isSelected ? chalk.green('◉') : chalk.gray('◯');
+            // 当前行额外加上箭头指示器 - 每行都预留位置，防止文字偏移
+            // 最后一行使用结束符号 └
+            let cursor: string;
+            if (isCurrent) {
+               cursor = chalk.cyan('>');
+            } else if (isLast) {
+               cursor = chalk.gray('└');
+            } else {
+               cursor = chalk.gray('│');
+            }
 
             // 选项文本
             const label = isCurrent ? chalk.cyan(option.label) : option.label;
@@ -84,11 +94,11 @@ class CustomMultiselectPrompt extends Prompt {
             // 提示文本
             const hint = option.hint ? chalk.gray(` (${option.hint})`) : '';
 
-            return `${arrow}${checkbox} ${label}${hint}`;
+            return `${cursor} ${checkbox} ${label}${hint}`;
          })
          .join('\n');
 
-      // 移除底部“已选择 X 项”提示文本
+      // 移除底部"已选择 X 项"提示文本
       return `${title}${instructions}\n${optionsList}`;
    }
 
