@@ -1,7 +1,7 @@
 {
    "name": "trw",
-   "version": "1.0.0",
-   "description": "脚手架项目-用于快速搭建项目架构",
+   "version": "1.0.1",
+   "description": "CLI scaffolding tool for quick project architecture setup",
    "main": "dist/index.js",
    "bin": {
       "trw": "./dist/cli.js"

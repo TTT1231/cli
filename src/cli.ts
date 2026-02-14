@@ -3,7 +3,7 @@
 import { cac } from 'cac';
 import chalk from 'chalk';
 import updateNotifier from 'update-notifier';
-import { newProject, addProjectSettings } from './commands';
+import { newProject, addProjectSettings, updateCommand } from './commands';
 
 import pkg from '../package.json';
 import { listTemplates } from './commands/ls';
@@ -31,6 +31,11 @@ cli.command('ls', '模板列表').action(async () => {
 // add 命令，用于配置项目
 cli.command('add [config-type]', '添加项目配置').action(async configType => {
    await addProjectSettings(configType);
+});
+
+// update 命令，用于更新CLI工具
+cli.command('update', '更新CLI工具').action(async () => {
+   await updateCommand();
 });
 
 // 错误处理
