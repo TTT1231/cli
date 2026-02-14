@@ -13,8 +13,8 @@ export const WEB_CODE_FORMAT: RequireDependencies = {
       eslint: '^9.33.0',
       'eslint-config-prettier': '^10.1.8',
       'eslint-plugin-prettier': '^5.5.5',
-      '@typescript-eslint/eslint-plugin': '^8.53.0',
-      '@typescript-eslint/parser': '^8.53.0',
+      '@typescript-eslint/eslint-plugin': '^8.55.0',
+      '@typescript-eslint/parser': '^8.55.0',
 
       //prettier
       prettier: '^3.6.2',
@@ -28,13 +28,13 @@ export const WEB_TAILWINDCSS: RequireDependencies = {
    },
 };
 export const WEB_DEVTOOLS_DEV_DEPENDENCY: Record<string, string> = {
-   'vite-plugin-vue-devtools': '^8.0.5',
+   'vite-plugin-vue-devtools': '^8.0.6',
 };
 
 //web Router
 export const WEB_ROUTER: RequireDependencies = {
    dependencies: {
-      'vue-router': '^4.6.4',
+      'vue-router': '^5.0.2',
       nprogress: '^0.2.0',
    },
 };

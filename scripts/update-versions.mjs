@@ -1,31 +1,29 @@
+/**
+ * 依赖版本自动更新脚本
+ *
+ * 【功能说明】
+ * 自动检查 src/project-settings/constant.ts 中定义的所有 npm 依赖包，
+ * 并将它们的版本号更新到 npm 上的最新版本。
+ *
+ * 【执行时机】
+ * - 手动执行：pnpm update-versions
+ * - 建议在发布新版本前、定期维护时、或发现依赖有安全漏洞时执行
+ * - 不会自动执行（没有配置 git hooks 或 CI/CD）
+ *
+ * 【使用场景】
+ * 保持 CLI 工具模板中的依赖包版本始终最新，确保用户创建新项目时使用最新依赖
+ */
+
 import { readFile, writeFile } from 'node:fs/promises';
 import { exec } from 'node:child_process';
 import { promisify } from 'node:util';
 import { fileURLToPath } from 'node:url';
-import { dirname, resolve, join } from 'node:path';
+import { dirname, join } from 'node:path';
 
 const execAsync = promisify(exec);
 
-// 获取脚本所在目录
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-// 跨平台路径解析：优先使用相对路径，但如果失败则使用绝对路径
-function resolvePath(relativePath) {
-   const tryPaths = [
-      // 尝试相对路径
-      join(__dirname, relativePath),
-      // 尝试从当前工作目录
-      resolve(process.cwd(), relativePath),
-      // 尝试从脚本位置的父目录
-      resolve(__dirname, '..', relativePath),
-   ];
-
-   // 找到第一个存在的路径（在运行时验证）
-   return tryPaths[0];
-}
-
-const CONSTANT_FILE_PATH = resolvePath('../src/project-settings/constant.ts');
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const CONSTANT_FILE_PATH = join(__dirname, '../src/project-settings/constant.ts');
 
 /**
  * 获取 npm 包的最新版本
